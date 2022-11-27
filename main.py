@@ -1,5 +1,5 @@
 import pygame
-from breakout.screens import WelcomeScreen
+from breakout.screens import WelcomeScreen,IntroScreen,GameScreen,NextGameScreen
 
 
 class Game:
@@ -13,7 +13,10 @@ class Game:
     def run(self):
         # Available screens:
         screens = {
-            "welcome": WelcomeScreen
+            "welcome": WelcomeScreen,
+            "introduction": IntroScreen,
+            "game": GameScreen,
+            "next_game": NextGameScreen
         }
 
         # Start the loop
