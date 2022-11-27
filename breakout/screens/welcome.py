@@ -28,8 +28,6 @@ class WelcomeScreen(BaseScreen):
         self.button_score = TextBox(
             (160, 60), "SCORE", color=(0, 0, 0), bgcolor=(255,255,255)
         )
-        # self.button_title.rect.x = 450
-        # self.button_title.rect.y = 150
         self.button_start.rect.x = 250
         self.button_start.rect.y = 400
         self.button_score.rect.x = 650
@@ -63,6 +61,7 @@ class WelcomeScreen(BaseScreen):
             mouse = event.pos
             if self.button_score.rect.collidepoint(mouse):
                 print("you click score")
-                self.next_screen = "introduction"
+                self.next_screen = "menuscore"
+                self.bc_music.stop()
                 self.running = False
         

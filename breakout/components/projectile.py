@@ -9,7 +9,7 @@ class Projectile(pygame.sprite.Sprite):
         self.scaled_image = pygame.transform.scale(self.image, (1,1))
         self.rect = self.scaled_image.get_rect()
         self.rect.x = x + 10
-        self.rect.y = y + 30
+        self.rect.y = y + 10
  
 
     # def draw(self,win):
