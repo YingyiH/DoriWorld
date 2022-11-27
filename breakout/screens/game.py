@@ -1,7 +1,7 @@
 import random
 import pygame
 from screens import BaseScreen
-from ..components import Background,Character, Projectile, Enemy
+from ..components import Background,Character, Projectile, Enemy, Score
 
 from components import TextBox
 
@@ -13,8 +13,11 @@ class GameScreen(BaseScreen):
         self.character = Character()
         self.projectiles = pygame.sprite.Group()
         self.enemies = pygame.sprite.Group()
+        self.sprites = pygame.sprite.Group()
+        self.score = Score()
 
     def update(self):
+
         self.character.update()
         keys = pygame.key.get_pressed()
         if keys[pygame.K_LEFT]:
@@ -29,15 +32,21 @@ class GameScreen(BaseScreen):
         self.projectiles.update()
         self.enemies.update()
         self.manage_enemies()
+        self.text_score = TextBox(
+            (130, 45), f"SCORE: {self.score.score}", color=(0,0,0), bgcolor=(255,255,255)
+        )
+        self.sprites.add(self.text_score)
 
     def draw(self):
         self.window.fill((255, 255, 255))
         self.window.blit(self.background.scaled_image, self.background.rect )
         self.window.blit(self.character.scaled_image, self.character.rect)
+        self.text_score.rect.x = 900
+        self.text_score.rect.y = 20
+        self.sprites.draw(self.window)
+
         self.projectiles.draw(self.window)
         self.enemies.draw(self.window)
-        # self.sprites.draw(self.window)
-        # self.tiles.draw(self.window)
 
     def manage_event(self, event):
         if event.type == pygame.MOUSEBUTTONDOWN:
@@ -62,3 +71,4 @@ class GameScreen(BaseScreen):
         for i in self.projectiles:
             if pygame.sprite.spritecollide(i, self.enemies, dokill=True):
                 i.kill()
+                self.score.add_score()

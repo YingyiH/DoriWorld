@@ -15,4 +15,7 @@ class Character(pygame.sprite.Sprite):
             self.rect.y += self.rect.y * self.gravity
 
     def jump(self):
-        self.rect.y -= 100
+        if self.rect.y < 400:
+            pass
+        else:
+            self.rect.y -= 100
