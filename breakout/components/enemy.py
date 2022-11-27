@@ -18,7 +18,7 @@ class Enemy(pygame.sprite.Sprite):
 
     def update(self):
         # self.rect.y += self.rect.y * 0.1
-        self.rect.y += 5
+        self.rect.y += 8
 
         if self.rect.y > 420:
             self.rect.y = 420
