@@ -1,5 +1,5 @@
 import pygame
-from breakout.screens import WelcomeScreen,IntroScreen,PrepareScreen,GameScreen,GameOverScreen,MenuScoreScreen
+from breakout.screens import WelcomeScreen,PrepareScreen,GameScreen,GameOverScreen,MenuScoreScreen
 
 
 class Game:
@@ -14,7 +14,6 @@ class Game:
         # Available screens:
         screens = {
             "welcome": WelcomeScreen,
-            "introduction": IntroScreen,
             "menuscore": MenuScoreScreen,
             "prepare": PrepareScreen,
             "game": GameScreen,

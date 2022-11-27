@@ -24,11 +24,7 @@ class GameScreen(BaseScreen):
         if keys[pygame.K_LEFT]:
             self.character.rect.left = max(self.character.rect.left - 10, 0)
         elif keys[pygame.K_RIGHT]:
-            self.character.rect.right = min(self.character.rect.right + 10, 1150)
-
-        if self.character.rect.right > 1100:
-            self.running = False
-            self.next_screen = "prepare"
+            self.character.rect.right = min(self.character.rect.right + 10, 1000)
 
         self.projectiles.update()
         self.enemies.update()
@@ -61,9 +57,10 @@ class GameScreen(BaseScreen):
             self.next_screen = "gameover"
 
     def manage_event(self, event):
-        if event.type == pygame.MOUSEBUTTONDOWN:
-            self.running = False
-            self.next_screen = "welcome"
+        if event.type == pygame.KEYDOWN:
+            if event.key == pygame.K_b:
+                self.running = False
+                self.next_screen = "welcome"
 
         if event.type == pygame.KEYDOWN:
             if event.key == pygame.K_SPACE:
@@ -77,7 +74,7 @@ class GameScreen(BaseScreen):
 
     def manage_enemies(self):
         if random.randrange(0, 100) < 1:
-            enemy = Enemy(random.randint(10, 1200), random.randint(-1, 1))
+            enemy = Enemy(random.randint(10, 900), random.randint(-1, 1))
             self.enemies.add(enemy)
 
         for i in self.projectiles:

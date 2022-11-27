@@ -18,4 +18,4 @@ class Character(pygame.sprite.Sprite):
         if self.rect.y < 400:
             pass
         else:
-            self.rect.y -= 100
+            self.rect.y -= 150

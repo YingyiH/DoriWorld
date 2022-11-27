@@ -20,11 +20,11 @@ class Enemy(pygame.sprite.Sprite):
         # self.rect.y += self.rect.y * 0.1
         self.rect.y += 8
 
-        if self.rect.y > 420:
-            self.rect.y = 420
-        if self.rect.y == 420:
+        if self.rect.y > 430:
+            self.rect.y = 430
+        if self.rect.y == 430:
             self.rect.x += 5 * self.side
         if self.rect.x <= 0:
             self.side *= -1
         if self.rect.x >= 950:
-            self.rect.x *= -1
+            self.side *= -1
