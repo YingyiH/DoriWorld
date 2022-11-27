@@ -10,10 +10,10 @@ class IntroScreen(BaseScreen):
         self.sprites = pygame.sprite.Group()
         # buttons:
         self.button_skip = TextBox(
-            (100, 45), "SKIP", color=(255, 255, 255), bgcolor=(0, 0, 0)
+            (100, 45), "SKIP", color=(0,0,0), bgcolor=(255,255,255)
         )
         self.button_next = TextBox(
-            (100, 45), "NEXT", color=(255, 255, 255), bgcolor=(0,0,0)
+            (100, 45), "NEXT", color=(0,0,0), bgcolor=(255,255,255)
         )
 
         self.sprites.add(self.button_skip,self.button_next)
@@ -39,12 +39,12 @@ class IntroScreen(BaseScreen):
             mouse = event.pos
             if self.button_skip.rect.collidepoint(mouse):
                 print("you click start")
-                self.next_screen = "game"
+                self.next_screen = "prepare"
                 self.running = False
 
         if event.type == pygame.MOUSEBUTTONDOWN :
             mouse = event.pos
             if self.button_next.rect.collidepoint(mouse):
                 print("you click score")
-                self.next_screen = "game"
+                self.next_screen = "prepare"
                 self.running = False

@@ -1,7 +1,7 @@
 import random
 import pygame
 from screens import BaseScreen
-from ..components import Background,Character
+from ..components import Background,Character, Projectile
 
 from components import TextBox
 
@@ -9,28 +9,29 @@ from components import TextBox
 class GameScreen(BaseScreen):
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
-        self.background = Background("./images/background/game_background1.jpeg")
-        #Doris character
+        self.background = Background("./images/background/game_background2.jpeg")
         self.character = Character()
+        self.projectiles = pygame.sprite.Group()
 
     def update(self):
         self.character.update()
         keys = pygame.key.get_pressed()
         if keys[pygame.K_LEFT]:
             self.character.rect.left = max(self.character.rect.left - 10, 0)
-            self.image = pygame.image.load('./images/character/3.png')
         elif keys[pygame.K_RIGHT]:
             self.character.rect.right = min(self.character.rect.right + 10, 1150)
-            self.image = pygame.image.load('./images/character/1.png')
 
         if self.character.rect.right > 1100:
             self.running = False
-            self.next_screen = "next_game"
+            self.next_screen = "prepare"
+
+        self.projectiles.update()
 
     def draw(self):
         self.window.fill((255, 255, 255))
         self.window.blit(self.background.scaled_image, self.background.rect )
         self.window.blit(self.character.scaled_image, self.character.rect)
+        self.projectiles.draw(self.window)
         # self.sprites.draw(self.window)
         # self.tiles.draw(self.window)
 
@@ -41,9 +42,12 @@ class GameScreen(BaseScreen):
 
         if event.type == pygame.KEYDOWN:
             if event.key == pygame.K_SPACE:
-                if self.character.rect.bottom < 300:
-                    pass
-                else:
-                    self.character.jump()
+                self.character.jump()
+            elif event.key == pygame.K_q:
+                projectile = Projectile(self.character.rect.x, self.character.rect.y, -1)
+                self.projectiles.add(projectile)
+            elif event.key == pygame.K_e:
+                projectile = Projectile(self.character.rect.x, self.character.rect.y, 1)
+                self.projectiles.add(projectile)
 
         

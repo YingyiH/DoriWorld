@@ -25,6 +25,7 @@ class TextBox(pygame.sprite.Sprite):
         self.draw()
         self.rect = self.image.get_rect()
 
+
     def draw(self):
         """Renders and centers the text"""
         self.image.fill(self.bgcolor)

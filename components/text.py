@@ -2,12 +2,10 @@ import pygame
 
 pygame.font.init()
 
-default_font = pygame.font.get_default_font()
-
 
 def render_text(text, size, color=(0, 0, 0)):
     """Returns a surface with rendered text"""
-    font = pygame.font.Font(default_font, size)
+    font = pygame.font.Font('./font/LycheeSoda.ttf', size)
     return font.render(text, True, color)
 
 
