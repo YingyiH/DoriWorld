@@ -1,5 +1,5 @@
 import pygame
-from breakout.screens import WelcomeScreen,IntroScreen,PrepareScreen,GameScreen
+from breakout.screens import WelcomeScreen,IntroScreen,PrepareScreen,GameScreen,GameOverScreen
 
 
 class Game:
@@ -16,7 +16,8 @@ class Game:
             "welcome": WelcomeScreen,
             "introduction": IntroScreen,
             "prepare": PrepareScreen,
-            "game": GameScreen
+            "game": GameScreen,
+            "gameover": GameOverScreen
         }
 
         # Start the loop
@@ -42,5 +43,5 @@ class Game:
 
 
 if __name__ == "__main__":
-    tilebreaker = Game()
-    tilebreaker.run()
+    doriWorld = Game()
+    doriWorld.run()

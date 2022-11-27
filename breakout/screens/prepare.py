@@ -21,10 +21,8 @@ class PrepareScreen(BaseScreen):
         keys = pygame.key.get_pressed()
         if keys[pygame.K_LEFT]:
             self.character.rect.left = max(self.character.rect.left - 10, 0)
-            self.image = pygame.image.load('./images/character/3.png')
         elif keys[pygame.K_RIGHT]:
             self.character.rect.right = min(self.character.rect.right + 10, 1150)
-            self.image = pygame.image.load('./images/character/1.png')
 
         if self.character.rect.right > 1100:
             self.running = False

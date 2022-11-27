@@ -15,6 +15,7 @@ class GameScreen(BaseScreen):
         self.enemies = pygame.sprite.Group()
         self.sprites = pygame.sprite.Group()
         self.score = Score()
+        self.time = 60
 
     def update(self):
 
@@ -32,10 +33,15 @@ class GameScreen(BaseScreen):
         self.projectiles.update()
         self.enemies.update()
         self.manage_enemies()
+        self.time = 60 -int(pygame.time.get_ticks()/1000)
+ 
         self.text_score = TextBox(
             (130, 45), f"SCORE: {self.score.score}", color=(0,0,0), bgcolor=(255,255,255)
         )
-        self.sprites.add(self.text_score)
+        self.text_time = TextBox(
+            (130, 45), f"TIME: {self.time}", color=(0,0,0), bgcolor=(255,255,255)
+        )
+        self.sprites.add(self.text_score,self.text_time)
 
     def draw(self):
         self.window.fill((255, 255, 255))
@@ -43,10 +49,16 @@ class GameScreen(BaseScreen):
         self.window.blit(self.character.scaled_image, self.character.rect)
         self.text_score.rect.x = 900
         self.text_score.rect.y = 20
+        self.text_time.rect.x = 900
+        self.text_time.rect.y = 80
         self.sprites.draw(self.window)
 
         self.projectiles.draw(self.window)
         self.enemies.draw(self.window)
+
+        if self.time == 0:
+            self.running = False
+            self.next_screen = "gameover"
 
     def manage_event(self, event):
         if event.type == pygame.MOUSEBUTTONDOWN:
@@ -72,3 +84,10 @@ class GameScreen(BaseScreen):
             if pygame.sprite.spritecollide(i, self.enemies, dokill=True):
                 i.kill()
                 self.score.add_score()
+        
+        if pygame.sprite.spritecollide(self.character, self.enemies, dokill=False):
+            self.character.kill()
+            self.running = False
+            self.next_screen = "gameover"
+            #elf.score.add_score()
+            print('xd')

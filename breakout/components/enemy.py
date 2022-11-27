@@ -7,7 +7,7 @@ class Enemy(pygame.sprite.Sprite):
         self.side = side
         # load the image:
         self.image = pygame.image.load('./images/character/merchant.png')
-        self.scaled_image = pygame.transform.scale(self.image, (100,100))
+        self.scaled_image = pygame.transform.scale(self.image, (30,45))
         self.rect = self.scaled_image.get_rect()
         self.rect.x = x
         self.rect.y = 5
