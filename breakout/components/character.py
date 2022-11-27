@@ -7,7 +7,7 @@ class Character(pygame.sprite.Sprite):
         self.scaled_image = pygame.transform.scale(self.image, (30, 45))
         self.rect = self.scaled_image.get_rect()
         self.rect.x = 100
-        self.rect.y = 420
+        self.rect.y = 450
         self.gravity = 0.02
             
     def update(self):
