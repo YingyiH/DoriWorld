@@ -1,3 +1,4 @@
 from .background import Background
 from .character import Character
-from . projectile import Projectile
+from .projectile import Projectile
+from .enemy import Enemy 

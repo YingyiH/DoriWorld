@@ -1,7 +1,7 @@
 import random
 import pygame
 from screens import BaseScreen
-from ..components import Background,Character, Projectile
+from ..components import Background,Character, Projectile, Enemy
 
 from components import TextBox
 
@@ -12,6 +12,7 @@ class GameScreen(BaseScreen):
         self.background = Background("./images/background/game_background2.jpeg")
         self.character = Character()
         self.projectiles = pygame.sprite.Group()
+        self.enemies = pygame.sprite.Group()
 
     def update(self):
         self.character.update()
@@ -26,12 +27,15 @@ class GameScreen(BaseScreen):
             self.next_screen = "prepare"
 
         self.projectiles.update()
+        self.enemies.update()
+        self.manage_enemies()
 
     def draw(self):
         self.window.fill((255, 255, 255))
         self.window.blit(self.background.scaled_image, self.background.rect )
         self.window.blit(self.character.scaled_image, self.character.rect)
         self.projectiles.draw(self.window)
+        self.enemies.draw(self.window)
         # self.sprites.draw(self.window)
         # self.tiles.draw(self.window)
 
@@ -50,4 +54,11 @@ class GameScreen(BaseScreen):
                 projectile = Projectile(self.character.rect.x, self.character.rect.y, 1)
                 self.projectiles.add(projectile)
 
-        
+    def manage_enemies(self):
+        if random.randrange(0, 100) < 1:
+            enemy = Enemy(random.randint(10, 1200), random.randint(-1, 1))
+            self.enemies.add(enemy)
+
+        for i in self.projectiles:
+            if pygame.sprite.spritecollide(i, self.enemies, dokill=True):
+                i.kill()
