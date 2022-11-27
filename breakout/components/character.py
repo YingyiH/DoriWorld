@@ -11,7 +11,7 @@ class Character(pygame.sprite.Sprite):
         self.gravity = 0.02
             
     def update(self):
-        if self.rect.y < 400:
+        if self.rect.y < 450:
             self.rect.y += self.rect.y * self.gravity
 
     def jump(self):

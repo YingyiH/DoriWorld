@@ -23,7 +23,7 @@ class Enemy(pygame.sprite.Sprite):
         if self.rect.y > 420:
             self.rect.y = 420
         if self.rect.y == 420:
-            self.rect.x += 2 * self.side
+            self.rect.x += 5 * self.side
         if self.rect.x <= 0:
             self.side *= -1
         if self.rect.x >= 950:
