@@ -82,9 +82,9 @@ class GameScreen(BaseScreen):
             enemy = Enemy(random.randint(10, 900), random.randint(-1, 1))
             self.enemies.add(enemy)
 
-        for i in self.projectiles:
-            if pygame.sprite.spritecollide(i, self.enemies, dokill=True):
-                i.kill()
+        for item in self.projectiles:
+            if pygame.sprite.spritecollide(item, self.enemies, dokill=True):
+                item.kill()
                 self.score.add_score()
         
         if pygame.sprite.spritecollide(self.character, self.enemies, dokill=False):
