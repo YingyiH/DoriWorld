@@ -3,6 +3,7 @@ from screens import BaseScreen
 from components import TextBox
 from ..components import Background
 from pygame.locals import *
+from models.score import Score
 
 
 class MenuScoreScreen(BaseScreen):
@@ -23,21 +24,42 @@ class MenuScoreScreen(BaseScreen):
         self.button_menu.rect.y = 460
 
         # score text:
-        if self.scores == {}:
+        score = Score("user.json")
+        self.userinfo_text = score.load_from_json()
+        if self.userinfo_text["users"] == []:
+        # if self.scores == {}:
             self.text_scores = TextBox(
             (800, 230), "Empty", color=(0,0,0), bgcolor=(252,206,172)
         )
         else:
-            
-            self.score = self.scores["scores"]
-            self.text_scores = TextBox(
-                (700, 50), f"score: --------------------------------------------------- {self.score}", color=(0,0,0), bgcolor=(252,206,172)
-            )
-        self.text_scores.rect.x = 100
-        self.text_scores.rect.y = 130
+            self.space = 130
+            self.history_list = []
+            # self.score = self.scores["scores"]
+            for item in self.userinfo_text["users"]:
+                index = self.userinfo_text["users"].index(item)
+                username = item["username"]
+                grades = item["grades"]
+                # self.text_scores = TextBox(
+                #     (700, 50), f"{username} ------------------------------------------------------------ {grades}", color=(0,0,0), bgcolor=(252,206,172)
+                # ) 
+                self.history_list.append(
+                    TextBox(
+                        (700, 50), f"{username} ------------------------------------------------------------ {grades}", color=(0,0,0), bgcolor=(252,206,172)
+                    ) 
+                )
+                self.space += 10
+                self.history_list[index].rect.x = 100
+                self.history_list[index].rect.y = self.space
+                self.sprites.add(self.history_list[index])
+                self.space += 20
+            # self.text_scores = TextBox(
+            #     (700, 50), f"score: --------------------------------------------------- {self.score}", color=(0,0,0), bgcolor=(252,206,172)
+            # )
+        # self.text_scores.rect.x = 100
+        # self.text_scores.rect.y = 130
         
         #background:
-        self.sprites.add(self.button_menu,self.text_scores)
+        self.sprites.add(self.button_menu)
         self.background = Background("./images/background/game_background5.jpeg")
 
     def update(self):

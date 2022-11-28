@@ -16,7 +16,6 @@ class BaseScreen:
         if scores == None:
             self.scores = {}
         else:
-            # self.scores = scores
             self.scores = scores
         ######################################
     def run(self):

@@ -25,6 +25,9 @@ class Score():
         self.name =  file["name"]
         for information in file["users"]:
             self._users.append(User(information["username"], information["grades"]))
+
+        userdict = file
+        return userdict
         
     def get_users(self,sorted_by=None):
         sorted_users = []
