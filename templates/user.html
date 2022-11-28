@@ -1,0 +1,22 @@
+{% extends "base.html" %}
+{% block content %}
+
+    <h1>{{ user.username }}</h1>
+    
+    <table class="table table-striped table-sm w-auto table-bordered">
+        <thead>
+            <tr>
+              <th scope="col">Grades</th>
+            </tr>
+          </thead>
+          <tbody>
+            {% for grade in user.grades %}
+            <tr>
+              <td>{{ grade }}</td>
+            </tr>
+            {% endfor %}
+          </tbody>
+    </table>
+    
+{% endblock %}
+

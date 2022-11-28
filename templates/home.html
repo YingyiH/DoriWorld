@@ -1,0 +1,23 @@
+{% extends "base.html" %}
+{% block content %}
+
+    <h1>Score History</h1>
+    <thead>
+        <tr>
+        <th scope="col">Username:</th>
+        </tr>
+        <p></p>
+    </thead>
+    <tbody>
+    {% for user in score.get_users() %}
+        <tr>
+            <td>
+                <a href="{{ url_for('user',username=user.username) }}">{{user.username}}</a>
+                <p></p>
+            </td>
+        </tr> 
+
+    {% endfor %}
+    
+{% endblock %}
+
