@@ -50,9 +50,9 @@ class PrepareScreen(BaseScreen):
         self.window.blit(self.character.scaled_image, self.character.rect)
         self.projectiles.draw(self.window)
         self.window.blit(self.text_hint,((760,300)))
-        self.window.blit(self.text_move,((150,50)))
-        self.window.blit(self.text_jump,((150,100)))
-        self.window.blit(self.text_shoot,((150,150)))
+        self.window.blit(self.text_move,((150,70)))
+        self.window.blit(self.text_jump,((150,120)))
+        self.window.blit(self.text_shoot,((150,170)))
 
     def manage_event(self, event):
 
