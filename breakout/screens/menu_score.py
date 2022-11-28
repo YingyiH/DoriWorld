@@ -10,6 +10,7 @@ class MenuScoreScreen(BaseScreen):
         super().__init__(*args, **kwargs)
         self.sprites = pygame.sprite.Group()
         pygame.font.init()
+        self.score = 0
 
         # title:
         self.image_title = pygame.image.load('./images/title.png')
@@ -20,9 +21,27 @@ class MenuScoreScreen(BaseScreen):
         )
         self.button_menu.rect.x = 900
         self.button_menu.rect.y = 460
+
+        # score text:
+        if self.scores == {}:
+            self.text_scores = TextBox(
+            (800, 230), "Empty", color=(0,0,0), bgcolor=(252,206,172)
+        )
+        else:
+            
+            self.score = self.scores["scores"]
+            self.text_scores = TextBox(
+                (700, 50), f"score: --------------------------------------------------- {self.score}", color=(0,0,0), bgcolor=(252,206,172)
+            )
+        self.text_scores.rect.x = 100
+        self.text_scores.rect.y = 130
+        
         #background:
-        self.sprites.add(self.button_menu)
+        self.sprites.add(self.button_menu,self.text_scores)
         self.background = Background("./images/background/game_background5.jpeg")
+
+    def update(self):
+        pass
 
     # to set the position of the button:
     def draw(self):
@@ -30,9 +49,6 @@ class MenuScoreScreen(BaseScreen):
         self.window.blit(self.background.scaled_image,self.background.rect)
         self.window.blit(self.scaled_image_title, ((60, 60)))
         self.sprites.draw(self.window)
-
-    def update(self):
-        pass
 
     def manage_event(self, event):
         print(event)

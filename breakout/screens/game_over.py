@@ -11,6 +11,9 @@ class GameOverScreen(BaseScreen):
         self.sprites = pygame.sprite.Group()
         pygame.mixer.init()
         pygame.font.init()
+
+        self.score = self.scores["scores"]
+
         # music:
         self.bc_music = pygame.mixer.Sound('./audio/music.mp3')
         self.bc_music.play()
@@ -21,7 +24,7 @@ class GameOverScreen(BaseScreen):
         self.scaled_image_title = pygame.transform.scale(self.image_title, (250, 50))
         # score:
         self.font = pygame.font.Font('./font/LycheeSoda.ttf', 64)
-        self.text_score = self.font.render(f"Score:", True, (0,0,0))
+        self.text_score = self.font.render(f"Score:  {self.score}", True, (0,0,0))
         # buttons:
         self.button_start = TextBox(
             (160, 60), "Again", color=(0, 0, 0), bgcolor=(255, 255, 255)
@@ -45,7 +48,6 @@ class GameOverScreen(BaseScreen):
         self.sprites.draw(self.window)
         self.window.blit(self.text_score,((270,260)))
 
-        
     def update(self):
         pass
 

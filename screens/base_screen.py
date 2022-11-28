@@ -4,12 +4,20 @@ import pygame
 class BaseScreen:
     """Base class for all game screens"""
 
-    def __init__(self, window):
+    def __init__(self, window,scores=None):
         # window surface
         self.window = window
         # By default, there is no next screen (= game quits)
         self.next_screen = False
 
+        #####################################
+        # what did I changed:
+        if scores == None:
+            self.scores = {}
+        else:
+            # self.scores = scores
+            self.scores = scores
+        ######################################
     def run(self):
         """
         This is the main method of the class.

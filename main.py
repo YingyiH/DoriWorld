@@ -19,6 +19,7 @@ class Game:
             "game": GameScreen,
             "gameover": GameOverScreen
         }
+        scores = {}
 
         # Start the loop
         running = True
@@ -30,7 +31,7 @@ class Game:
                 raise RuntimeError(f"Screen {current_screen} not found!")
 
             # Create a new screen object, "connected" to the window
-            screen = screen_class(self.window)
+            screen = screen_class(self.window,scores)
 
             # Run the screen
             screen.run()

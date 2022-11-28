@@ -5,6 +5,7 @@ from ..components import Background,Character, Projectile, IntroText
 
 from components import TextBox
 
+
 class PrepareScreen(BaseScreen):
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
@@ -13,7 +14,6 @@ class PrepareScreen(BaseScreen):
         self.projectiles = pygame.sprite.Group()
         self.sprites = pygame.sprite.Group()
         self.text = IntroText()
-
 
         #Sign for game.py
         self.image_sign = pygame.image.load('./images/DoNotCross.png')

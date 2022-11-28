@@ -1,7 +1,7 @@
 import random
 import pygame
 from screens import BaseScreen
-from ..components import Background,Character, Projectile, Enemy, Score
+from ..components import Background,Character, Projectile, Enemy
 
 from components import TextBox
 
@@ -14,11 +14,10 @@ class GameScreen(BaseScreen):
         self.projectiles = pygame.sprite.Group()
         self.enemies = pygame.sprite.Group()
         self.sprites = pygame.sprite.Group()
-        self.score = Score()
         self.time = 60
+        self.score = 0
         pygame.mixer.init()
         self.bc_music = pygame.mixer.Sound('./audio/success.wav')
-
 
     def update(self):
 
@@ -32,10 +31,10 @@ class GameScreen(BaseScreen):
         self.projectiles.update()
         self.enemies.update()
         self.manage_enemies()
-        self.time = 60 -int(pygame.time.get_ticks()/1000)
+        self.time = 60 - int(pygame.time.get_ticks()/1000)
  
         self.text_score = TextBox(
-            (130, 45), f"SCORE: {self.score.score}", color=(0,0,0), bgcolor=(255,255,255)
+            (130, 45), f"SCORE: {self.score}", color=(0,0,0), bgcolor=(255,255,255)
         )
         self.text_time = TextBox(
             (130, 45), f"TIME: {self.time}", color=(0,0,0), bgcolor=(255,255,255)
@@ -85,9 +84,10 @@ class GameScreen(BaseScreen):
         for item in self.projectiles:
             if pygame.sprite.spritecollide(item, self.enemies, dokill=True):
                 item.kill()
-                self.score.add_score()
+                self.score += 1
         
         if pygame.sprite.spritecollide(self.character, self.enemies, dokill=False):
             self.character.kill()
+            self.scores["scores"] = self.score
             self.running = False
             self.next_screen = "gameover"
