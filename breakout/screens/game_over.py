@@ -56,7 +56,7 @@ class GameOverScreen(BaseScreen):
             mouse = event.pos
             if self.button_start.rect.collidepoint(mouse):
                 print("you click start")
-                self.next_screen = "prepare"
+                self.next_screen = "game"
                 self.bc_music.stop()
                 self.running = False
 

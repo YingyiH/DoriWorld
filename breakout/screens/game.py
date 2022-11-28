@@ -16,15 +16,18 @@ class GameScreen(BaseScreen):
         self.sprites = pygame.sprite.Group()
         self.score = Score()
         self.time = 60
+        pygame.mixer.init()
+        self.bc_music = pygame.mixer.Sound('./audio/success.wav')
+
 
     def update(self):
 
         self.character.update()
         keys = pygame.key.get_pressed()
         if keys[pygame.K_LEFT]:
-            self.character.rect.left = max(self.character.rect.left - 10, 0)
+            self.character.rect.left = max(self.character.rect.left - 5, 0)
         elif keys[pygame.K_RIGHT]:
-            self.character.rect.right = min(self.character.rect.right + 10, 1000)
+            self.character.rect.right = min(self.character.rect.right + 5, 1000)
 
         self.projectiles.update()
         self.enemies.update()
@@ -66,9 +69,11 @@ class GameScreen(BaseScreen):
             if event.key == pygame.K_SPACE:
                 self.character.jump()
             elif event.key == pygame.K_q:
+                self.bc_music.play()
                 projectile = Projectile(self.character.rect.x, self.character.rect.y, -1)
                 self.projectiles.add(projectile)
             elif event.key == pygame.K_e:
+                self.bc_music.play()
                 projectile = Projectile(self.character.rect.x, self.character.rect.y, 1)
                 self.projectiles.add(projectile)
 
@@ -86,5 +91,3 @@ class GameScreen(BaseScreen):
             self.character.kill()
             self.running = False
             self.next_screen = "gameover"
-            #elf.score.add_score()
-            print('xd')
