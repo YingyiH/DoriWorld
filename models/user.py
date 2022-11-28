@@ -12,7 +12,7 @@ class User():
     def __str__(self):
         return f'{self.username} {self.grades}'
 
-    def to_dict(self):
+    def to_user_dict(self):
         return  {
             "username": self.username,
             "grades": self.grades

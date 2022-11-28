@@ -2,6 +2,7 @@ import random
 import pygame
 from screens import BaseScreen
 from ..components import Background,Character, Projectile, Enemy
+from models.score import Score
 
 from components import TextBox
 
@@ -89,5 +90,9 @@ class GameScreen(BaseScreen):
         if pygame.sprite.spritecollide(self.character, self.enemies, dokill=False):
             self.character.kill()
             self.scores["scores"] = self.score
+            # write in json file
+            score = Score("user.json")
+            score.add_user("unknown",self.score)
+            score.save()
             self.running = False
             self.next_screen = "gameover"

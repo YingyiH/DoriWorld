@@ -22,7 +22,7 @@ class Score():
         with open(self.filename, 'r') as data:
             file = json.load(data)
 
-        self.username =  file["name"]
+        self.name =  file["name"]
         for information in file["users"]:
             self._users.append(User(information["username"], information["grades"]))
         
@@ -41,8 +41,8 @@ class Score():
 
     def to_dict(self):
         dict =  {
-            "username": self.username,
-            "grades": [item.to_dict() for item in self._users] # Be careful here should use []
+            "name": self.name,
+            "users": [item.to_user_dict() for item in self._users] # Be careful here should use []
         }
         return dict
 

@@ -1,6 +1,7 @@
 import pygame
 
 
+
 class BaseScreen:
     """Base class for all game screens"""
 
