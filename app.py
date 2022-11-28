@@ -15,7 +15,7 @@ def home():
 @app.route('/user/<string:username>') ## to add an argument to the function
 def user(username):
     score = Score("user.json")
-    user = score.get_users(username)
+    user = score.get_user(username)
     return render_template('user.html',user = user)
 
 @app.route('/user/add', endpoint='create a user', methods = ["POST"])
@@ -41,23 +41,6 @@ def add_user():
         except ValueError:
             return render_template('error.html',error=400),400
 
-@app.route('/user/<string:username>/grades/add', endpoint='add a grade', methods = ["POST"])
-def add_grade(username):
-    if request.method == "POST":
-        score = Score("user.json")
-        user = score.get_users(username)
-        grade = request.json
-
-        # ERROR CONDITION:
-        if not user:
-            return render_template('error.html',error=404),404
-        # OUTPUT:
-        try:
-            user.add_grade(grade['grade'])
-            score.save()
-            return 'Saved'
-        except ValueError:
-            return render_template('error.html',error=400),400
 
 @app.route("/error",methods = ["POST"])
 def reror():

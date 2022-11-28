@@ -28,7 +28,12 @@ class Score():
 
         userdict = file
         return userdict
-        
+    
+    def get_user(self,username):
+        for item in self._users:
+            if username == item.username: 
+                return item 
+
     def get_users(self,sorted_by=None):
         sorted_users = []
         if sorted_by == None:
