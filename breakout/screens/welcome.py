@@ -64,6 +64,7 @@ class WelcomeScreen(BaseScreen):
                 self.user = self.input_box.get_text()
                 if self.user == "":
                     self.scores["username"] = "unknown"
+                    self.user = "unknown"
                 else:
                     self.scores["username"] = self.user
                 score = Score("user.json")
