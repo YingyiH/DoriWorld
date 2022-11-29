@@ -22,6 +22,7 @@ class PrepareScreen(BaseScreen):
         # Music:
         pygame.mixer.init()
         self.bc_music = pygame.mixer.Sound('./audio/success.wav')
+        self.jump_music = pygame.mixer.Sound('./audio/axe.mp3')
 
     def update(self):
         self.character.update()
@@ -62,6 +63,7 @@ class PrepareScreen(BaseScreen):
                     pass
                 else:
                     self.character.jump()
+                    self.jump_music.play()
 
         if event.type == pygame.KEYDOWN:
             if event.key == pygame.K_b:

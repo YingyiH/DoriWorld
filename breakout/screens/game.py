@@ -21,6 +21,8 @@ class GameScreen(BaseScreen):
         self.user = "unknown"
         pygame.mixer.init()
         self.bc_music = pygame.mixer.Sound('./audio/success.wav')
+        self.jump_music = pygame.mixer.Sound('./audio/axe.mp3')
+        
 
     def update(self):
 
@@ -34,13 +36,14 @@ class GameScreen(BaseScreen):
         self.projectiles.update()
         self.enemies.update()
         self.manage_enemies()
-        self.time = 60 - int(pygame.time.get_ticks()/1000)
+        self.time -= 1/60
+        # self.time = 60 - int(pygame.time.get_ticks()/1000)
  
         self.text_score = TextBox(
             (130, 45), f"SCORE: {self.score}", color=(0,0,0), bgcolor=(255,255,255)
         )
         self.text_time = TextBox(
-            (130, 45), f"TIME: {self.time}", color=(0,0,0), bgcolor=(255,255,255)
+            (130, 45), f"TIME: {int(self.time)}", color=(0,0,0), bgcolor=(255,255,255)
         )
         self.sprites.add(self.text_score,self.text_time)
 
@@ -57,9 +60,9 @@ class GameScreen(BaseScreen):
         self.projectiles.draw(self.window)
         self.enemies.draw(self.window)
 
-        if self.time == 0:
-            self.running = False
-            self.next_screen = "gameover"
+        # if self.time <= 0:
+        #     self.running = False
+        #     self.next_screen = "gameover"
 
     def manage_event(self, event):
         if event.type == pygame.KEYDOWN:
@@ -70,6 +73,7 @@ class GameScreen(BaseScreen):
         if event.type == pygame.KEYDOWN:
             if event.key == pygame.K_SPACE:
                 self.character.jump()
+                self.jump_music.play()
             elif event.key == pygame.K_q:
                 self.bc_music.play()
                 projectile = Projectile(self.character.rect.x, self.character.rect.y, -1)
@@ -80,7 +84,7 @@ class GameScreen(BaseScreen):
                 self.projectiles.add(projectile)
 
     def manage_enemies(self):
-        if random.randrange(0, 100) < 1:
+        if random.randrange(0, 13) < 1:
             enemy = Enemy(random.randint(10, 900), random.randint(-1, 1))
             self.enemies.add(enemy)
 
@@ -93,7 +97,7 @@ class GameScreen(BaseScreen):
             self.character.kill()
             self.scores["scores"] = self.score
             self.user = self.scores["username"]
-            # write in json file
+            #write in json file
             score = Score("user.json")
             if self.user == "unknown":
                 user = score.get_user("unknown")
@@ -103,17 +107,33 @@ class GameScreen(BaseScreen):
                 user = score.get_user(self.user)
                 user.add_score(self.score)
                 score.save()
-            self.upload()
-                
             self.running = False
             self.next_screen = "gameover"
 
-    def upload(self):
-            # add request
-            self.url = "http://127.0.0.1:5000"
-            data = {
-                "username": self.user,
-                "grades":self.score
-            }
-            requests.post(self.url,json=data)
-            print("uploaded")
+        elif self.time <= 0:
+            self.scores["scores"] = self.score
+            self.user = self.scores["username"]
+            #write in json file
+            score = Score("user.json")
+            if self.user == "unknown":
+                user = score.get_user("unknown")
+                user.add_score(self.score)
+                score.save()
+            else:
+                user = score.get_user(self.user)
+                user.add_score(self.score)
+                score.save()
+            self.running = False
+            self.next_screen = "gameover"
+
+            # post request:
+            # Flask_url = "http://127.0.0.1:5000"
+            # data = {
+            #     "username": self.user,
+            #     "grades": self.score
+            # }
+            # requests.post(Flask_url,json=data)
+            # print("uploaded")
+                
+            # self.running = False
+            # self.next_screen = "gameover"
