@@ -3,6 +3,7 @@ import pygame
 from screens import BaseScreen
 from ..components import Background,Character, Projectile, Enemy, InputBox
 from models.score import Score
+import requests
 
 from components import TextBox
 
@@ -102,7 +103,17 @@ class GameScreen(BaseScreen):
                 user = score.get_user(self.user)
                 user.add_score(self.score)
                 score.save()
-
+            self.upload()
                 
             self.running = False
             self.next_screen = "gameover"
+
+    def upload(self):
+            # add request
+            self.url = "http://127.0.0.1:5000"
+            data = {
+                "username": self.user,
+                "grades":self.score
+            }
+            requests.post(self.url,json=data)
+            print("uploaded")

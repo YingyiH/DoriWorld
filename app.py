@@ -25,7 +25,7 @@ def add_user():
         user = request.json
 
         # ERROR CONDITION:
-        if ("username" not in user.keys()) or ("user" not in user.keys()):
+        if ("username" not in user.keys()):
             return render_template('error.html',error=400),400
         if (score.get_users(user['username'])):
             return render_template('error.html',error=409),409
