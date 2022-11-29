@@ -27,7 +27,6 @@ class MenuScoreScreen(BaseScreen):
         score = Score("user.json")
         self.userinfo_text = score.load_from_json()
         if self.userinfo_text["users"] == []:
-        # if self.scores == {}:
             self.text_scores = TextBox(
             (800, 230), "Empty", color=(0,0,0), bgcolor=(252,206,172)
         )
@@ -39,9 +38,6 @@ class MenuScoreScreen(BaseScreen):
                 index = self.userinfo_text["users"].index(item)
                 username = item["username"]
                 grades = item["grades"]
-                # self.text_scores = TextBox(
-                #     (700, 50), f"{username} ------------------------------------------------------------ {grades}", color=(0,0,0), bgcolor=(252,206,172)
-                # ) 
                 self.history_list.append(
                     TextBox(
                         (700, 50), f"{username} ------------------------------------------------------------ {grades}", color=(0,0,0), bgcolor=(252,206,172)
@@ -52,11 +48,6 @@ class MenuScoreScreen(BaseScreen):
                 self.history_list[index].rect.y = self.space
                 self.sprites.add(self.history_list[index])
                 self.space += 20
-            # self.text_scores = TextBox(
-            #     (700, 50), f"score: --------------------------------------------------- {self.score}", color=(0,0,0), bgcolor=(252,206,172)
-            # )
-        # self.text_scores.rect.x = 100
-        # self.text_scores.rect.y = 130
         
         #background:
         self.sprites.add(self.button_menu)

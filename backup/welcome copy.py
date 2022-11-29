@@ -1,8 +1,9 @@
 import pygame
 from screens import BaseScreen
 from components import TextBox
-from ..components import Background
+from ..components import Background,InputBox
 from pygame.locals import *
+from models.score import Score
 
 
 class WelcomeScreen(BaseScreen):
@@ -11,6 +12,7 @@ class WelcomeScreen(BaseScreen):
         self.sprites = pygame.sprite.Group()
         pygame.mixer.init()
         pygame.font.init()
+        self.user = "unknown"
 
         # music:
         self.bc_music = pygame.mixer.Sound('./audio/music.mp3')
@@ -19,11 +21,6 @@ class WelcomeScreen(BaseScreen):
         #title:
         self.image_title = pygame.image.load('./images/title.png')
         self.scaled_image_title = pygame.transform.scale(self.image_title, (550, 100))
-        # self.rect_title = self.scaled_image_title.get_rect()
-        # buttons:
-        # self.button_title = TextBox(
-        #     (160, 60), "DORI WORLD", color=(0, 0, 0), bgcolor=(179, 236, 255)
-        # )
         self.button_start = TextBox(
             (160, 60), "START", color=(0, 0, 0), bgcolor=(255, 255, 255)
         )
@@ -32,6 +29,7 @@ class WelcomeScreen(BaseScreen):
         )
         self.font = pygame.font.Font('./font/LycheeSoda.ttf', 40)
         self.text_login = self.font.render(f"LOGIN :", True, (0,0,0))
+        self.input_box = InputBox(500, 270, 200, 40, '')
 
         self.button_start.rect.x = 250
         self.button_start.rect.y = 400
@@ -48,9 +46,10 @@ class WelcomeScreen(BaseScreen):
         self.window.blit(self.scaled_image_title, ((255, 150)))
         self.sprites.draw(self.window)
         self.window.blit(self.text_login,((350,270)))
+        self.input_box.draw(self.window)
         
     def update(self):
-        pass
+        self.input_box.update()
 
     def manage_event(self, event):
         print(event)
@@ -61,6 +60,16 @@ class WelcomeScreen(BaseScreen):
                 print("you click start")
                 self.next_screen = "prepare"
                 self.bc_music.stop()
+                # get user input
+                self.user = self.input_box.get_text()
+                if self.user == "":
+                    self.scores["username"] = "unknown"
+                    self.user = "unknown"
+                else:
+                    self.scores["username"] = self.user
+                score = Score("user.json")
+                score.add_user(self.user)
+                score.save()
                 self.running = False
 
         if event.type == pygame.MOUSEBUTTONDOWN :
@@ -70,5 +79,9 @@ class WelcomeScreen(BaseScreen):
                 self.next_screen = "menuscore"
                 self.bc_music.stop()
                 self.running = False
+        
+        self.input_box.handle_event(event)
+
+
         
         
