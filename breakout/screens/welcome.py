@@ -1,7 +1,7 @@
 import pygame
 from screens import BaseScreen
 from components import TextBox
-from ..components import Background
+from ..components import Background,InputBox
 from pygame.locals import *
 
 
@@ -27,6 +27,7 @@ class WelcomeScreen(BaseScreen):
         )
         self.font = pygame.font.Font('./font/LycheeSoda.ttf', 40)
         self.text_login = self.font.render(f"LOGIN :", True, (0,0,0))
+        self.input_box = InputBox(500, 270, 200, 40, '')
 
         self.button_start.rect.x = 250
         self.button_start.rect.y = 400
@@ -43,9 +44,10 @@ class WelcomeScreen(BaseScreen):
         self.window.blit(self.scaled_image_title, ((255, 150)))
         self.sprites.draw(self.window)
         self.window.blit(self.text_login,((350,270)))
+        self.input_box.draw(self.window)
         
     def update(self):
-        pass
+        self.input_box.update()
 
     def manage_event(self, event):
         print(event)
@@ -65,5 +67,7 @@ class WelcomeScreen(BaseScreen):
                 self.next_screen = "menuscore"
                 self.bc_music.stop()
                 self.running = False
+        
+        self.input_box.handle_event(event)
         
         
