@@ -21,13 +21,16 @@ class User():
     def add_score(self,grade):
         # if (type(grade) != int or str(grade).isdigit() == False):
         #     raise ValueError
-        if(type(grade) == int or str(grade).isdigit() == True ):
-            if (int(grade) >= 0):
-                self.grades.append(int(grade))
+        if (grade != " "):
+            if(type(grade) == int or str(grade).isdigit() == True ):
+                if (int(grade) >= 0):
+                    self.grades.append(int(grade))
+                else:
+                    raise ValueError
             else:
                 raise ValueError
         else:
-            raise ValueError
+            self.grades.append(grade)
         
 
         

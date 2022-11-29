@@ -95,7 +95,8 @@ class GameScreen(BaseScreen):
             # write in json file
             score = Score("user.json")
             if self.user == "unknown":
-                score.add_user(self.user,self.score)
+                user = score.get_user(self.user)
+                user.add_score(self.score)
                 score.save()
             else:
                 user = score.get_user(self.user)
