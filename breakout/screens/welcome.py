@@ -68,7 +68,7 @@ class WelcomeScreen(BaseScreen):
                 else:
                     self.scores["username"] = self.user
                 score = Score("user.json")
-                score.add_user(self.user,[])
+                score.add_user(self.user)
                 score.save()
                 self.running = False
 

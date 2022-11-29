@@ -58,14 +58,7 @@ class Score():
         with open(self.filename, 'w') as data:
             json.dump(self.to_dict(),data)
 
-    def add_user(self,username,grades):
-        # if(username == ""):
-        #     username = "unknown"
-        # else:
-        #     self._users.append(User(username,grades))
-            
-
-        #what I add
+    def add_user(self,username,grades=None):
         exist = False
 
         if(username == ""):
@@ -74,8 +67,11 @@ class Score():
             for item in self._users:
                 if item.username == username:
                     exist = True
-                    item.grades.append(grades)
-                    break
+                    if grades != None:
+                        item.grades.append(grades)
+                        break
+                    else:
+                        pass
 
         if exist == False:
             self._users.append(User(username,grades))
