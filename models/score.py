@@ -59,20 +59,25 @@ class Score():
             json.dump(self.to_dict(),data)
 
     def add_user(self,username,grades):
-        exists = False
+        # if(username == ""):
+        #     username = "unknown"
+        # else:
+        #     self._users.append(User(username,grades))
+            
+
+        #what I add
+        exist = False
+
         if(username == ""):
             username = "unknown"
         else:
-            self._users.append(User(username,grades))
-            
-        # for item in self._users:
-        #     if (item.username != username):
-        #         continue
-        #     else:
-        #         # exists = True
-        #         break
+            for item in self._users:
+                if item.username == username:
+                    exist = True
+                    item.grades.append(grades)
+                    break
 
-        # if exists == False:
-        #     raise TypeError
-        
-        # return exists
+        if exist == False:
+            self._users.append(User(username,grades))
+        else:
+            pass
