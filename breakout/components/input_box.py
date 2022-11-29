@@ -44,8 +44,14 @@ class InputBox(pygame.sprite.Sprite):
         width = max(200, self.txt_surface.get_width()+10)
         self.rect.w = width
 
+        # what I add
+        self.get_text()
+
     def draw(self, window):
         # Blit the text.
         window.blit(self.txt_surface, (self.rect.x+5, self.rect.y+5))
         # Blit the rect.
         pygame.draw.rect(window, self.color, self.rect, 2)
+    
+    def get_text(self):
+        return self.text

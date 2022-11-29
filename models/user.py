@@ -18,7 +18,7 @@ class User():
             "grades": self.grades
         }
 
-    def add_grade(self,grade):
+    def add_score(self,grade):
         # if (type(grade) != int or str(grade).isdigit() == False):
         #     raise ValueError
         if(type(grade) == int or str(grade).isdigit() == True ):

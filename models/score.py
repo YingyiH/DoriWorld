@@ -61,18 +61,18 @@ class Score():
     def add_user(self,username,grades):
         exists = False
         if(username == ""):
-            raise ValueError
+            username = "unknown"
         else:
             self._users.append(User(username,grades))
             
-        for item in self._users:
-            if (item.username != username):
-                continue
-            else:
-                exists = True
-                break
+        # for item in self._users:
+        #     if (item.username != username):
+        #         continue
+        #     else:
+        #         # exists = True
+        #         break
 
-        if exists == False:
-            raise TypeError
+        # if exists == False:
+        #     raise TypeError
         
-        return exists
+        # return exists

@@ -3,6 +3,7 @@ from screens import BaseScreen
 from components import TextBox
 from ..components import Background,InputBox
 from pygame.locals import *
+from models.score import Score
 
 
 class WelcomeScreen(BaseScreen):
@@ -11,6 +12,7 @@ class WelcomeScreen(BaseScreen):
         self.sprites = pygame.sprite.Group()
         pygame.mixer.init()
         pygame.font.init()
+        self.user = "unknown"
 
         # music:
         self.bc_music = pygame.mixer.Sound('./audio/music.mp3')
@@ -58,6 +60,15 @@ class WelcomeScreen(BaseScreen):
                 print("you click start")
                 self.next_screen = "prepare"
                 self.bc_music.stop()
+                # get user input
+                self.user = self.input_box.get_text()
+                if self.user == "":
+                    self.scores["username"] = "unknown"
+                else:
+                    self.scores["username"] = self.user
+                score = Score("user.json")
+                score.add_user(self.user,[])
+                score.save()
                 self.running = False
 
         if event.type == pygame.MOUSEBUTTONDOWN :
@@ -69,5 +80,7 @@ class WelcomeScreen(BaseScreen):
                 self.running = False
         
         self.input_box.handle_event(event)
+
+
         
         
