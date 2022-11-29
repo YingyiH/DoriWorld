@@ -32,22 +32,22 @@ def add_user():
             
         # OUTPUT
         try:
-            username = user['username']
-            grades = user["grades"]
-            score.add_user(username,grades)
-            score.save()
-
-            #---------------
             # username = user['username']
             # grades = user["grades"]
-            # if  username == "unknown":
-            #     user = score.get_user("unknown")
-            #     user.add_score(grades)
-            #     score.save()
-            # else:
-            #     user = score.get_user(username)
-            #     user.add_score(grades)
-            #     score.save()
+            # score.add_user(username,grades)
+            # score.save()
+
+            #---------------
+            username = user['username']
+            grades = user["grades"]
+            if  username == "unknown":
+                user = score.get_user("unknown")
+                user.add_score(grades)
+                score.save()
+            else:
+                user = score.get_user(username)
+                user.add_score(grades)
+                score.save()
 
             #----------------
             

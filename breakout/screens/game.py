@@ -97,43 +97,29 @@ class GameScreen(BaseScreen):
             self.character.kill()
             self.scores["scores"] = self.score
             self.user = self.scores["username"]
-            #write in json file
-            score = Score("user.json")
-            if self.user == "unknown":
-                user = score.get_user("unknown")
-                user.add_score(self.score)
-                score.save()
-            else:
-                user = score.get_user(self.user)
-                user.add_score(self.score)
-                score.save()
+            # post request:
+            Flask_url = "http://127.0.0.1:5000/user/add"
+            data = {
+                "username": self.user,
+                "grades": self.score
+            }
+            requests.post(Flask_url,json=data)
+            print("uploaded")
+                
             self.running = False
             self.next_screen = "gameover"
 
         elif self.time <= 0:
             self.scores["scores"] = self.score
             self.user = self.scores["username"]
-            #write in json file
-            score = Score("user.json")
-            if self.user == "unknown":
-                user = score.get_user("unknown")
-                user.add_score(self.score)
-                score.save()
-            else:
-                user = score.get_user(self.user)
-                user.add_score(self.score)
-                score.save()
+            # post request:
+            Flask_url = "http://127.0.0.1:5000/user/add"
+            data = {
+                "username": self.user,
+                "grades": self.score
+            }
+            requests.post(Flask_url,json=data)
+            print("uploaded")
+                
             self.running = False
             self.next_screen = "gameover"
-
-            # post request:
-            # Flask_url = "http://127.0.0.1:5000"
-            # data = {
-            #     "username": self.user,
-            #     "grades": self.score
-            # }
-            # requests.post(Flask_url,json=data)
-            # print("uploaded")
-                
-            # self.running = False
-            # self.next_screen = "gameover"
