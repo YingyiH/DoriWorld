@@ -15,8 +15,8 @@ class WelcomeScreen(BaseScreen):
         self.user = "unknown"
 
         # music:
-        self.bc_music = pygame.mixer.Sound('./audio/music.mp3')
-        self.bc_music.play()
+        pygame.mixer.music.load('./audio/music.mp3')
+        pygame.mixer.music.play()
 
         #title:
         self.image_title = pygame.image.load('./images/title.png')
@@ -58,8 +58,8 @@ class WelcomeScreen(BaseScreen):
             mouse = event.pos
             if self.button_start.rect.collidepoint(mouse):
                 print("you click start")
+                pygame.mixer.music.pause()
                 self.next_screen = "prepare"
-                self.bc_music.stop()
                 # get user input
                 self.user = self.input_box.get_text()
                 if self.user == "":
@@ -77,7 +77,7 @@ class WelcomeScreen(BaseScreen):
             if self.button_score.rect.collidepoint(mouse):
                 print("you click score")
                 self.next_screen = "menuscore"
-                self.bc_music.stop()
+                pygame.mixer.music.pause()
                 self.running = False
         
         self.input_box.handle_event(event)

@@ -15,8 +15,8 @@ class GameOverScreen(BaseScreen):
         self.score = self.scores["scores"]
 
         # music:
-        self.bc_music = pygame.mixer.Sound('./audio/music.mp3')
-        self.bc_music.play()
+        pygame.mixer.music.load('./audio/music.mp3')
+        pygame.mixer.music.play()
 
 
         # title:
@@ -59,7 +59,7 @@ class GameOverScreen(BaseScreen):
             if self.button_start.rect.collidepoint(mouse):
                 print("you click start")
                 self.next_screen = "game"
-                self.bc_music.stop()
+                pygame.mixer.music.pause()
                 self.running = False
 
         if event.type == pygame.MOUSEBUTTONDOWN :
@@ -67,6 +67,6 @@ class GameOverScreen(BaseScreen):
             if self.button_menu.rect.collidepoint(mouse):
                 print("you click score")
                 self.next_screen = "welcome"
-                self.bc_music.stop()
+                pygame.mixer.music.pause()
                 self.running = False
         

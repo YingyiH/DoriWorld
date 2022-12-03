@@ -20,8 +20,7 @@ class GameScreen(BaseScreen):
         self.score = 0
         self.user = "unknown"
         pygame.mixer.init()
-        self.bc_music = pygame.mixer.Sound('./audio/success.wav')
-        self.jump_music = pygame.mixer.Sound('./audio/axe.mp3')
+        
         
 
     def update(self):
@@ -73,13 +72,16 @@ class GameScreen(BaseScreen):
         if event.type == pygame.KEYDOWN:
             if event.key == pygame.K_SPACE:
                 self.character.jump()
-                self.jump_music.play()
+                pygame.mixer.music.load('./audio/axe.mp3')
+                pygame.mixer.music.play(1)
             elif event.key == pygame.K_q:
-                self.bc_music.play()
+                pygame.mixer.music.load('./audio/success.wav')
+                pygame.mixer.music.play(1)
                 projectile = Projectile(self.character.rect.x, self.character.rect.y, -1)
                 self.projectiles.add(projectile)
             elif event.key == pygame.K_e:
-                self.bc_music.play()
+                pygame.mixer.music.load('./audio/success.wav')
+                pygame.mixer.music.play(1)
                 projectile = Projectile(self.character.rect.x, self.character.rect.y, 1)
                 self.projectiles.add(projectile)
 

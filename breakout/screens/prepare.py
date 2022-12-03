@@ -13,16 +13,13 @@ class PrepareScreen(BaseScreen):
         self.projectiles = pygame.sprite.Group()
         self.sprites = pygame.sprite.Group()
         self.text = IntroText()
-
-
+        
         #Sign for game.py
         self.image_sign = pygame.image.load('./images/DoNotCross.png')
         self.scaled_image_sign = pygame.transform.scale(self.image_sign, (70, 100))
 
         # Music:
         pygame.mixer.init()
-        self.bc_music = pygame.mixer.Sound('./audio/success.wav')
-        self.jump_music = pygame.mixer.Sound('./audio/axe.mp3')
 
     def update(self):
         self.character.update()
@@ -58,27 +55,26 @@ class PrepareScreen(BaseScreen):
     def manage_event(self, event):
 
         if event.type == pygame.KEYDOWN:
-            if event.key == pygame.K_SPACE:
-                if self.character.rect.bottom < 300:
-                    pass
-                else:
-                    self.character.jump()
-                    self.jump_music.play()
-
-        if event.type == pygame.KEYDOWN:
             if event.key == pygame.K_b:
                 self.running = False
                 self.next_screen = "welcome"
 
         if event.type == pygame.KEYDOWN:
             if event.key == pygame.K_SPACE:
-                self.character.jump()
+                if self.character.rect.bottom < 300:
+                    pass
+                else:
+                    self.character.jump()
+                    pygame.mixer.music.load('./audio/axe.mp3')
+                    pygame.mixer.music.play(1)
             elif event.key == pygame.K_q:
-                self.bc_music.play()
+                pygame.mixer.music.load('./audio/success.wav')
+                pygame.mixer.music.play(1)
                 projectile = Projectile(self.character.rect.x, self.character.rect.y, -1)
                 self.projectiles.add(projectile)
             elif event.key == pygame.K_e:
-                self.bc_music.play()
+                pygame.mixer.music.load('./audio/success.wav')
+                pygame.mixer.music.play(1)
                 projectile = Projectile(self.character.rect.x, self.character.rect.y, 1)
                 self.projectiles.add(projectile)
 
