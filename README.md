@@ -1,5 +1,5 @@
 # DoriWorld
-2515-Pygame Project DoriWorld
+Pygame Project DoriWorld
 
 ## Author
 Student: Yingyi He
