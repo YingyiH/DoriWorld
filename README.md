@@ -2,8 +2,7 @@
 Pygame Project DoriWorld
 
 ## Author
-Student: Yingyi He
-Student ID: A01230375
+Yingyi He
 
 ## Description
 This repo remains all files of a shooting game. It made by pygame and Flask.
