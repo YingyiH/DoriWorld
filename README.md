@@ -18,7 +18,8 @@ This repo remains all files of a shooting game. It made by pygame and Flask.
   - The first page of the game, which is also its home page with User Login function
   
     <img width="1045" alt="Home-Menu-page" src="https://user-images.githubusercontent.com/100324443/210211406-2d11ee83-b738-43de-9686-f64ab426d94f.png">
-    <img width="649" alt="Login" src="https://user-images.githubusercontent.com/100324443/210211674-b8ab8230-8dd0-4fa1-af3b-30e9b172b0b4.png">
+    
+    <img width="400" alt="Login" src="https://user-images.githubusercontent.com/100324443/210211674-b8ab8230-8dd0-4fa1-af3b-30e9b172b0b4.png">
 
 - Menu score page
   - To check the user scores with user's score history and its updates
@@ -31,7 +32,7 @@ This repo remains all files of a shooting game. It made by pygame and Flask.
     <img width="1042" alt="Game-Introduction-page" src="https://user-images.githubusercontent.com/100324443/210211839-32801b43-dee3-4ebf-816e-eb1449fe9ba1.png">
 
 - Game page
-
+     
     <img width="1047" alt="Game-Page" src="https://user-images.githubusercontent.com/100324443/210211938-7ab054b2-379c-43ca-ad18-87dd13f5df45.png">
 
 - Gameover page
