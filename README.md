@@ -5,7 +5,7 @@ Pygame Project DoriWorld
 Yingyi He
 
 ## Description
-This repo remains all files of a shooting game. It made by pygame and Flask.
+This repo remains all files of a shooting game. It made by pygame and Flask. This project is to practice the skill of python OOP, python flask and pygame.
 
 ## Instruction
   1. Open web page "app.py"
